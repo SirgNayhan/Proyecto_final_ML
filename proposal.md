@@ -32,21 +32,16 @@ columnas**.
 
 **Fuente y verificabilidad:** el dataset se origina en datos de la *U.S.
 Bureau of Transportation Statistics* y del *NOAA* (clima), empaquetados por
-Hadley Wickham como el paquete `nycflights13` (R y Python), ampliamente usado
-en cursos de ciencia de datos. Se instala vía `pip install nycflights13`, por
-lo que la carga es 100% reproducible sin descargas manuales ni credenciales.
+Hadley Wickham como el paquete `nycflights13` (R y Python). Se instala vía `pip install nycflights13`, por
+lo que la carga es 100% reproducible.
 
-**Por qué cumple el nivel de complejidad pedido (Opción E — dataset
-propuesto):**
+**Requisitos de complejidas:**
 - ✅ Más de 50,000 filas (327,346) y **múltiples tablas relacionales** (5).
-- ✅ Datos **temporales** (todo un año, con estacionalidad y estructura horaria).
+- ✅ Datos **temporales** (todo un año, estacionalidad y estructura horaria).
 - ✅ Fuente verificable (BTS / NOAA, vía paquete documentado).
 - ✅ Tarea predictiva clara (retraso de vuelo — problema real de la industria).
-- ✅ Dificultad real de limpieza y modelado: valores faltantes no aleatorios,
-  necesidad de *joins* entre tablas, alto riesgo de *leakage* temporal (ver
-  sección 8), variables categóricas de alta cardinalidad (`dest`, `tailnum`),
-  y desbalance de clases.
-- ✅ No es un dataset clásico "de juguete" (no es Iris/Titanic/Wine/MNIST).
+- ✅ Dificultad de limpieza y modelado: valores faltantes no aleatorios,
+  necesidad de análisis de correlación entre tablas, alto riesgo de *leakage* temporal, variables categóricas de alta cardinalidad (`dest`, `tailnum`) y desbalance de clases.
 
 ## 4. Pregunta predictiva
 
