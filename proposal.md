@@ -133,22 +133,20 @@ aleatorio.
 
 **Regresión logística** con `class_weight='balanced'`, sobre variables
 numéricas estandarizadas y variables categóricas codificadas con one-hot
-(pipeline con `ColumnTransformer`). Se compara contra un baseline "tonto"
-(`DummyClassifier`, siempre predice la clase mayoritaria) para dejar en
-evidencia el problema de reportar solo accuracy.
+(pipeline con `ColumnTransformer`). Se compara contra un baseline simple, como `DummyClassifier`, que siempre predice la clase mayoritaria para dejar en evidencia el problema de reportar solo accuracy.
 
 **Resultado en validación (noviembre):**
 
 | Modelo | Accuracy | Precision | Recall | F1 | ROC-AUC |
 |---|---|---|---|---|---|
-| Dummy (clase mayoritaria) | 0.819 | 0.000 | 0.000 | **0.000** | 0.500 |
+| Dummy | 0.819 | 0.000 | 0.000 | **0.000** | 0.500 |
 | Regresión logística | 0.671 | 0.291 | 0.568 | **0.385** | 0.673 |
 
 **Resultado en test (diciembre, lectura final):**
 
 | Modelo | Accuracy | Precision | Recall | F1 | ROC-AUC |
 |---|---|---|---|---|---|
-| Dummy (clase mayoritaria) | 0.665 | 0.000 | 0.000 | **0.000** | 0.500 |
+| Dummy | 0.665 | 0.000 | 0.000 | **0.000** | 0.500 |
 | Regresión logística | 0.644 | 0.477 | 0.659 | **0.553** | 0.702 |
 
 El baseline honesto tiene *menor* accuracy que el dummy, pero es el único que
@@ -158,9 +156,7 @@ en un problema desbalanceado.
 
 ## 12. Riesgos técnicos
 
-- **Clima observado vs. pronóstico:** usar clima real (no pronosticado) hace
-  que el desempeño reportado sea optimista respecto a un sistema en
-  producción.
+- **Clima observado vs. pronóstico:** usar clima real en lugar del pronosticado (que sería el usado en una aplicación real del modelo) hace que el desempeño reportado sea optimista.
 - **Vuelos cancelados excluidos del target:** introduce un sesgo de
   selección; un sistema real debería tratar la cancelación como un evento
   aparte (posible trabajo futuro: modelo de 3 clases — a tiempo / retrasado /
@@ -180,10 +176,9 @@ en un problema desbalanceado.
 
 | Semana(s) | Actividad |
 |---|---|
-| 2–3 | Limpieza y feature engineering (interacciones clima×aeropuerto, franjas horarias, antigüedad de flota) |
-| 4–6 | Entrenar y comparar ≥3 familias de modelos (regresión logística, Random Forest, Gradient Boosting) con el mismo split temporal |
-| 7–8 | Búsqueda de hiperparámetros (validación en noviembre) |
-| 9–10 | Análisis de errores por segmento (aeropuerto, aerolínea, mes) e interpretabilidad (importancias / SHAP) |
+| 8-9 | Limpieza (interacciones clima×aeropuerto, franjas horarias, antigüedad de flota) |
+| 9-10 | Entrenar y comparar ≥3 familias de modelos (regresión logística, Random Forest, Gradient Boosting) con el mismo split temporal. Además de realizar la búsqueda de hiperparámetros (validación en noviembre) |
+| 10-11 | Análisis de errores por segmento (aeropuerto, aerolínea, mes) e interpretabilidad (importancias / SHAP) |
 | 11–12 | Evaluación final única en test (diciembre), redacción de resultados |
 | 13–14 | Discusión de riesgos éticos, sesgos y limitaciones; trabajo futuro |
 | 15–16 | Informe final, limpieza de repositorio, presentación |
